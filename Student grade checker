@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define the maximum number of students
+#define MAX_STUDENTS 100
+
+// Define the Student structure
+typedef struct {
+    int id;
+    char name[50];
+    float marks;
+    char grade[3]; // Adjusted to store grades like "A+", "B+" etc.
+} Student;
+
+// Function prototypes
+void inputStudentDetails(Student* s);
+void calculateGrade(float marks, char* grade);
+void displayStudentDetails(Student* s, int count);
+
+int main() {
+Student students[MAX_STUDENTS];
+    int numStudents;
+
+    printf("Enter the number of students: ");
+    scanf("%d", &numStudents);
+
+    // Clear the input buffer
+    getchar();
+
+    // Input details for each student
+    for(int i = 0; i < numStudents; i++) {
+        printf("Enter details for student %d (Format: ID Name Marks):\n", i + 1);
+        inputStudentDetails(&students[i]);
+        calculateGrade(students[i].marks, students[i].grade);
+    }
+
+    // Display student details
+    displayStudentDetails(students, numStudents);
+
+    return 0;
+}
+// Function to input student details
+}
+
+// Function to calculate grade based on marks
+void calculateGrade(float marks, char* grade) {
+    if (marks >= 95) {
+        strcpy(grade, "A+");
+    } else if (marks >= 90) {
+        strcpy(grade, "A");
+    } else if (marks >= 85) {
+        strcpy(grade, "B+");
+    } else if (marks >= 80) {
+        strcpy(grade, "B");
+    } else if (marks >= 75) {
+        strcpy(grade, "C+");
+    } else if (marks >= 70) {
+        strcpy(grade, "C");
+    } else if (marks >= 60) {
+        strcpy(grade, "D");
+    } else {
+        strcpy(grade, "F");
+    }
+}
+
+// Function to display student details
+void displayStudentDetails(Student* s, int count) {
+    printf("\nStudent Details:\n");
+    printf("ID\tName\t\tMarks\tGrade\n");
+    printf("----------------------------------------\n");
+    for(int i = 0; i < count; i++) {
+        printf("%d\t%-15s\t%.2f\t%s\n", s[i].id, s[i].name, s[i].marks, s[i].grade);
+    }
+}
